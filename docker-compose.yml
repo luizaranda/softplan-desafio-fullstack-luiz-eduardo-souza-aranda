@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+    database:
+        image: postgres
+        restart: unless-stopped
+        environment:
+            POSTGRES_DB: "softplan"
+            POSTGRES_USER: "postgres"
+            POSTGRES_PASSWORD: "pass"
+        volumes:
+            - ./postgres-data:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+    backend:
+        build:
+            context: backend
+            dockerfile: Dockerfile
+        ports:
+            - "8080:8080"
+        depends_on: 
+            - database
+
+    frontend:
+        build:
+            context: frontend
+            dockerfile: Dockerfile
+            args:
+                REACT_APP_API: http://127.0.0.1:8080/api
+        volumes:
+            - './frontend:/app'
+            - '/app/node_modules'
+        ports:
+            - "3000:3000"
+        depends_on:
+            - database
+            - backend
+        stdin_open: true
+        tty: true
