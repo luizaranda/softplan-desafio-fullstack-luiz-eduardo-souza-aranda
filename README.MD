@@ -1,3 +1,31 @@
+
+# Instalação do sistema
+Para a instalação do sistema basta rodar o comando
+
+	docker-compose up
+
+Após o build das aplicações, acessar a instância criada do postgres e rodar o script `sql_users.sql` para que seja criado os usuarios de acesso.
+
+Após estes procedimentos, acessar o sistema através da url padrão: http://localhost:3000
+
+Usuarios de acesso:
+	
+## Administrador
+
+	username: admin
+	password: admin
+
+## Triador
+
+	username: triador
+	password: triador
+
+## Finalizador
+
+	username: finalizador
+	password: finalizador
+
+
 # Desafio implementador fullstack
 
 Seja parte da jornada de transformação digital no Brasil.
